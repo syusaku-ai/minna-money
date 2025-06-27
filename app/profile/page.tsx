@@ -1,8 +1,8 @@
 'use client';
 
-import Protected from '../../components/Protected';
+import Protected from '@/components/Protected';
 import { useEffect, useState } from 'react';
-import { supabase } from '../../lib/supabaseClient';
+import { supabase } from '@/lib/supabaseClient';
 
 type Review = {
   id: string;
@@ -17,15 +17,15 @@ export default function ProfilePage() {
 
   useEffect(() => {
     (async () => {
-      // ログインユーザー取得
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
-      // 自分のレビューのみ取得
+
       const { data, error } = await supabase
-        .from<Review>('reviews')
+        .from('reviews')
         .select('id, service_name, rating, created_at')
         .eq('user_id', user.id)
         .order('created_at', { ascending: false });
+
       if (error) {
         console.error('マイレビュー取得エラー:', error.message);
       } else {
