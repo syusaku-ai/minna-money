@@ -1,6 +1,5 @@
 // app/layout.tsx
 import './globals.css';
-import Providers from '../components/Providers';
 import Header from '../components/Header';
 
 export const metadata = {
@@ -16,17 +15,15 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
-        {/* Google Search Console 所有権確認用メタタグ */}
+        {/* Google Search Console verification */}
         <meta
           name="google-site-verification"
           content="LFCiVOaqe48rgRQjKt7s_yM4UQ9qVOwtlZO48Yr4zPA"
         />
       </head>
       <body className="bg-white text-gray-900">
-        <Providers>
-          <Header />
-          {children}
-        </Providers>
+        <Header />
+        {children}
       </body>
     </html>
   );
